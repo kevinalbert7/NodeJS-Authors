@@ -2,51 +2,71 @@ const express = require('express')
 const port = 5000
 const app = express()
 
+
+var authors = [
+    {
+        name: "Lawrence Nowell",
+        nationality: "UK",
+        books: ["Beowulf"]
+    },
+    {
+        name: "William Shakespeare",
+        nationality: "UK",
+        books: ["Hamlet", "Othello", "Romeo and Juliet", "MacBeth"]
+    },
+    {
+        name: "Charles Dickens",
+        nationality: "US",
+        books: ["Oliver Twist", "A Christmas Carol"]
+    },
+    {
+        name: "Oscar Wilde",
+        nationality: "UK",
+        books: ["The Picture of Dorian Gray", "The Importance of Being Earnest"]
+    },
+  ]
+  
+  //Exercice 1
+
 app.get('/', (req, res) => {
     res.send("Authors API")
   })
+  
+  //Exercice 2
 
-  app.get('/authors/:id/', (req, res) => {
-    let id = req.params.id
-    let name = "";
-    let nationality = "";
-    let books = [""];
+app.get('/authors/:index/', (req, res) => {
+    const { index } = req.params
+    const author = authors[index - 1]
+    res.send( `${author.name}, ${author.nationality}` )
+  })
 
-    switch (id) {
-        case "1":
-            name = "Lawrence Nowell"
-            nationality = "UK";
-            books = ["Beowulf"]
-            break;
-        
-        case "2":
-            name = "William Shakespeare",
-            nationality = "UK";
-            books = ["Hamlet", "Othello", "Romeo and Juliet", "MacBeth"]
-            break;
+  //Exercice 3
 
-        case "3":
-            name = "Charles Dickens"
-            nationality = "US";
-            books = ["Oliver Twist", "A Christmas Carol"]
-            break;
-        
-        case "4":
-            name = "Oscar Wilde"
-            nationality = "UK";
-            books = ["The Picture of Dorian Gray", "The Importance of Being Earnest"]
-            break; 
+app.get('/authors/:index/books/', (req, res) => {
+    const { index } = req.params
+    const books = authors[index - 1].books
+    res.send(books.join(''))
+})
 
-        default:
-            name = "not found"
-            nationality = "not found"
-			books = "none"
-            break;
-    }
+    //Exercice 4
 
-    res.send(`${name}, ${nationality}`);
-});
+app.get('/json/authors/:id', (req, res) => {
+    const { index } = req.params
+    const author = authors[index - 1]
+    res.json({
+        name: `${author.name}`,
+        nationality: `${author.nationality}`
+    })
+})
+
+app.get('/json/authors/:id/books', (req, res) => {
+    const { index } = req.params
+    const books = authors[index - 1].books
+    res.json({
+        books: [`${books}`],
+    })
+})
 
 app.listen(port, () => {
-    // console.log('Server started on port: ' + port)
+    console.log('Server started on port: ' + port)
   })
