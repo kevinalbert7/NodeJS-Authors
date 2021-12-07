@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
   
   //Exercice 2
 
-app.get('/authors/:index/', (req, res) => {
+app.get('/authors/:id/', (req, res) => {
     const { id } = req.params
     const author = authors[id - 1]
     res.send( `${author.name}, ${author.nationality}` )
@@ -42,7 +42,7 @@ app.get('/authors/:index/', (req, res) => {
 
   //Exercice 3
 
-app.get('/authors/:index/books/', (req, res) => {
+app.get('/authors/:id/books/', (req, res) => {
     const { id } = req.params
     const books = authors[id - 1].books
     res.send(books.join(''))
