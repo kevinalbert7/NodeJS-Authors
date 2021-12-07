@@ -45,7 +45,7 @@ app.get('/authors/:id/', (req, res) => {
 app.get('/authors/:id/books/', (req, res) => {
     const { id } = req.params
     const books = authors[id - 1].books
-    res.send(books.join(''))
+    res.send(`${authors.books.join(', ')}`)
 })
 
     //Exercice 4
