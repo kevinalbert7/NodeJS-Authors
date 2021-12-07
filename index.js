@@ -75,8 +75,6 @@ app.get('/json/authors/:id/books', (req, res) => {
         res.status(404).send("Not found")
 
     }
-
-    }
 })
 
 app.listen(port, () => {
