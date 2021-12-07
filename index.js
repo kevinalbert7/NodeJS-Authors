@@ -53,18 +53,30 @@ app.get('/authors/:id/books/', (req, res) => {
 app.get('/json/authors/:id', (req, res) => {
     const { id } = req.params
     const author = authors[id - 1]
-    res.json({
-        name: author.name,
-        nationality: author.nationality
-    })
+
+    if (author) {
+        res.json({
+            name: author.name,
+            nationality: author.nationality
+        })
+    } else {
+        res.status(404).send("Not found")
+    }
 })
 
 app.get('/json/authors/:id/books', (req, res) => {
     const { id } = req.params
-    const books = authors[id - 1].books
-    res.json({
-        books: [`${books}`],
-    })
+    const auhtors = authors[id - 1] 
+    if (authors) {
+        res.json({
+            books: authors.books
+        })
+    } else {
+        res.status(404).send("Not found")
+
+    }
+
+    }
 })
 
 app.listen(port, () => {
