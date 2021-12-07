@@ -54,8 +54,8 @@ app.get('/json/authors/:id', (req, res) => {
     const { id } = req.params
     const author = authors[id - 1]
     res.json({
-        name: `${author.name}`,
-        nationality: `${author.nationality}`
+        name: author.name,
+        nationality: author.nationality
     })
 })
 
