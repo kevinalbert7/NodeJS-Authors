@@ -34,17 +34,28 @@ app.get('/', (req, res) => {
   
   //Exercice 2
 
-app.get('/authors/:id/', (req, res) => {
+app.get('/authors/:id', (req, res) => {
     const { id } = req.params
     const author = authors[id - 1]
-    res.send( `${author.name}, ${author.nationality}` )
-  })
+    
+    if (author) {
+        res.send(`${author.name}, ${author.nationality}`)    
+    } else {
+        res.status(404).send("Not found")
+    }
+})
 
   //Exercice 3
 
-app.get('/authors/:id/books/', (req, res) => {
+app.get('/authors/:id/books', (req, res) => {
     const { id } = req.params
-    const books = authors[id - 1].books
+    const author = authors[id - 1]
+    
+    if (author) {
+        res.send(`${author.books.join(', ')}`)    
+    } else {
+        res.status(404).send("Not found")
+    }
     res.send(`${authors.books.join(', ')}`)
 })
 
@@ -78,5 +89,5 @@ app.get('/json/authors/:id/books', (req, res) => {
 })
 
 app.listen(port, () => {
-    console.log('Server started on port: ' + port)
+    console.log(`Server started on port ${port}`)
   })
