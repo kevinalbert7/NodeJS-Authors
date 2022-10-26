@@ -26,13 +26,13 @@ var authors = [
     },
   ]
   
-  //Exercice 1
+//Exercice 1
 
 app.get('/', (req, res) => {
     res.send("Authors API")
   })
   
-  //Exercice 2
+//Exercice 2
 
 app.get('/authors/:id', (req, res) => {
     const { id } = req.params
@@ -45,7 +45,7 @@ app.get('/authors/:id', (req, res) => {
     }
 })
 
-  //Exercice 3
+//Exercice 3
 
 app.get('/authors/:id/books', (req, res) => {
     const { id } = req.params
@@ -59,7 +59,7 @@ app.get('/authors/:id/books', (req, res) => {
     res.send(`${authors.books.join(', ')}`)
 })
 
-    //Exercice 4
+//Exercice 4
 
 app.get('/json/authors/:id', (req, res) => {
     const { id } = req.params
@@ -77,8 +77,9 @@ app.get('/json/authors/:id', (req, res) => {
 
 app.get('/json/authors/:id/books', (req, res) => {
     const { id } = req.params
-    const auhtors = authors[id - 1] 
-    if (authors) {
+    const author = authors[id - 1]
+
+    if (author) {
         res.json({
             books: authors.books
         })
